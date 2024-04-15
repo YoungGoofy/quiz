@@ -1,0 +1,6 @@
+[db]
+host = '172.17.0.3'
+user = 'postgres'
+password = 'agps'
+database_name = 'postgres'
+port = 5432
