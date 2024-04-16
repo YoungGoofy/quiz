@@ -19,6 +19,6 @@ func GetGradeById(id int, db *gorm.DB) (models.Grade, error) {
 
 func CreateStudent(gradeId int, age int, mail string, db *gorm.DB) (uint, error) {
 	student := models.Student{GradeId: gradeId, Mail: mail, Age: age}
-	result := db.Table("students").Select("GradeId", "Name", "Lastname", "Mail", "Age").Create(&student)
+	result := db.Table("students").Select("GradeId", "Mail", "Age").Create(&student)
 	return student.StudentId, result.Error
 }

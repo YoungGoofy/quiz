@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ .title }}</title>
+    <style>
+        /* Центрирование формы */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Уменьшение ширины формы */
+        form {
+            max-width: 400px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-
-</body>
-</html>
