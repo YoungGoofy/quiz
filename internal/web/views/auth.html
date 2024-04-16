@@ -1,0 +1,47 @@
+{{ template "header.html"}}
+<div class="container mt-5">
+    <form  method="post">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com" required>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-md-4">
+                <label for="age" class="form-label">Возраст</label>
+                <div class="input-group">
+                    <button class="btn btn-outline-secondary" type="button" id="subtractAge">-</button>
+                    <input type="text" class="form-control" id="age" name="age" value="20" readonly>
+                    <button class="btn btn-outline-secondary" type="button" id="addAge">+</button>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <label for="grade" class="form-label">Уровень образования</label>
+                <select class="form-select" id="grade" name="grade">
+                    <option selected disabled>Выберите ваш уровень образования</option>
+                    {{ range .grades}}
+                        <option value="{{ .GradeId }}">{{ .Type }}</option>
+                    {{ end }}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript для изменения возраста с помощью стрелок
+    document.getElementById('addAge').addEventListener('click', function() {
+        var ageInput = document.getElementById('age');
+        var age = parseInt(ageInput.value);
+        ageInput.value = age + 1;
+    });
+
+    document.getElementById('subtractAge').addEventListener('click', function() {
+        var ageInput = document.getElementById('age');
+        var age = parseInt(ageInput.value);
+        if (age > 16) {
+            ageInput.value = age - 1;
+        }
+    });
+</script>
+{{ template "footer.html"}}

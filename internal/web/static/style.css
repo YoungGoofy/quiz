@@ -1,0 +1,17 @@
+/* Центрирование формы */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Уменьшение ширины формы */
+form {
+    max-width: 400px;
+    width: 100%;
+}
+
+body {
+    background-color: aqua;
+}

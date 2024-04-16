@@ -24,6 +24,6 @@ func (d *DB) GetGradeById(id int) (models.Grade, error) {
 	return handlers.GetGradeById(id, d.db)
 }
 
-func (d *DB) CreateStudent(gradeId int, age int, name, lastname, mail string) (uint, error) {
-	return handlers.CreateStudent(gradeId, age, name, lastname, mail, d.db)
+func (d *DB) CreateStudent(gradeId int, age int, mail string) (uint, error) {
+	return handlers.CreateStudent(gradeId, age, mail, d.db)
 }
