@@ -38,7 +38,7 @@ func (u *User) CreateUser(c *gin.Context) {
 		Age     int    `form:"age"`
 	}
 	if err := c.ShouldBind(&student); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
+		c.JSON(http.StatusUnauthorized, gin.H{
 			"error": err.Error(),
 		})
 		return
@@ -48,6 +48,7 @@ func (u *User) CreateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
+		return
 	}
 	log.Println("Add new user: ", id)
 	c.Redirect(http.StatusSeeOther, fmt.Sprintf("/quiz/%v/0", student.GradeId))
