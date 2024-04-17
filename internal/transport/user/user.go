@@ -1,14 +1,15 @@
 package user
 
 import (
+	"fmt"
 	"github.com/YoungGoofy/quiz/internal/db"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 )
 
 type User struct {
 	*db.DB
-	GradeID int
 }
 
 func NewUser(d *db.DB) *User {
@@ -37,7 +38,7 @@ func (u *User) CreateUser(c *gin.Context) {
 		Age     int    `form:"age"`
 	}
 	if err := c.ShouldBind(&student); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
+		c.JSON(http.StatusUnauthorized, gin.H{
 			"error": err.Error(),
 		})
 		return
@@ -47,8 +48,8 @@ func (u *User) CreateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
+		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"student": id,
-	})
+	log.Println("Add new user: ", id)
+	c.Redirect(http.StatusSeeOther, fmt.Sprintf("/quiz/%v/0", student.GradeId))
 }

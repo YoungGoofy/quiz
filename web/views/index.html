@@ -1,0 +1,65 @@
+{{ template "header.html"}}
+<div class="container-sm">
+    <div id="carouselExample" class="carousel slide">
+        <a href="/create-user">
+            <div class="carousel-inner" id="carouselInner">
+                <!-- Здесь будут добавлены фотографии -->
+            </div>
+        </a>
+    </div>
+</div>
+<script>
+    // Пути к фотографиям
+    var imagePaths = [
+        "../static/photos/img1.jpeg",
+        "../static/photos/img2.jpeg",
+        "../static/photos/img3.jpeg"
+    ];
+
+    // Получаем элемент carousel-inner
+    var carouselInner = document.getElementById("carouselInner");
+
+    // Добавляем каждую фотографию в карусель
+    imagePaths.forEach(function(path, index) {
+        // Создаем элемент carousel-item
+        var carouselItem = document.createElement("div");
+        carouselItem.classList.add("carousel-item");
+
+        // Создаем элемент img
+        var img = document.createElement("img");
+        img.classList.add("d-block");
+        img.classList.add("w-100");
+        img.src = path;
+        img.alt = "Image " + (index + 1);
+
+        // Добавляем img в carousel-item
+        carouselItem.appendChild(img);
+
+        // Если это первая фотография, то добавляем класс "active"
+        if (index === 0) {
+            carouselItem.classList.add("active");
+        }
+        // Добавляем carousel-item в carousel-inner
+        carouselInner.appendChild(carouselItem);
+    });
+
+    var currentIndex = 0;
+
+    // Функция для изменения активного элемента карусели
+    function changeSlide() {
+        // Удаляем класс "active" у текущего элемента карусели
+        var currentActiveItem = carouselInner.querySelector(".carousel-item.active");
+        currentActiveItem.classList.remove("active");
+
+        // Увеличиваем индекс или сбрасываем его, если достигнут конец массива
+        currentIndex = (currentIndex + 1) % imagePaths.length;
+
+        // Получаем следующий элемент карусели и добавляем ему класс "active"
+        var nextItem = carouselInner.children[currentIndex];
+        nextItem.classList.add("active");
+    }
+
+    // Вызываем функцию changeSlide каждые 5 секунд
+    setInterval(changeSlide, 5000);
+</script>
+{{ template "footer.html"}}

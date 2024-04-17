@@ -2,6 +2,7 @@ package transport
 
 import (
 	"github.com/YoungGoofy/quiz/internal/db"
+	"github.com/YoungGoofy/quiz/internal/transport/questions"
 	"github.com/YoungGoofy/quiz/internal/transport/user"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -14,6 +15,15 @@ func MainHandler(d *db.DB, g *gin.Engine) {
 			"title": "Home",
 		})
 	})
-	g.GET("/api/create-user", u.OpenAuthPage)
-	g.POST("/api/create-user", u.CreateUser)
+	g.GET("/create-user", u.OpenAuthPage)
+	g.POST("/create-user", u.CreateUser)
+	g.GET("/quiz/:grade_id/:id", questions.NewQuestion)
+	g.POST("/quiz/:grade_id/:id", questions.NextQuestion)
+	g.GET("/result", Result)
+}
+
+func Result(c *gin.Context) {
+	c.HTML(http.StatusOK, "result.html", gin.H{
+		"title": "Result",
+	})
 }
